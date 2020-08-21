@@ -23,19 +23,25 @@ export const useField = (type) => {
 export const useCountry = (name) => {
     const [country, setCountry] = useState(null)
     console.log('useCountry-hookin alussa')
-    //useEffect()
     
     useEffect(() => {
 
         if (name) {
                 axios
                     .get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
-                    .then((response) => {
-        
-                        console.log(response.data) 
+                    .then((response) => {  
+                        console.log(response.status) 
                         setCountry({...response.data[0], found: true})
-
-                        
+      
+                })
+                .catch(error => {
+                    // pääset käsiksi palvelimen palauttamaan virheilmoitusolioon näin
+                    const response = error.response.data
+                    console.log(response)
+                    if (response.status===404) {
+                        setCountry({found: false})
+                    }
+                    
                 })
         
         } else {
