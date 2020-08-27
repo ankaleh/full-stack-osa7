@@ -1,0 +1,6 @@
+POST http://localhost:3001/api/blogs/5f460c087e696caf60a46c87/comments
+Content-Type: application/json
+
+{
+    "text": "Aina samaa nurinaa!"
+}
